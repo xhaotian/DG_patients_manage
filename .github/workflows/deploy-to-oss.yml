@@ -1,0 +1,31 @@
+name: Deploy to OSS
+on:
+  push:
+    branches: [main]  # 仅当 main 分支有更新时触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20  # 确保 Node.js 版本与 Digital Garden 兼容
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Digital Garden
+        run: npm run build  # 执行 Digital Garden 的构建命令
+
+      - name: Upload to OSS
+        uses: manyuanrong/action-aliyun-oss@v3
+        with:
+          access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+          bucket-name: patient-info
+          bucket-region: oss-cn-beijing  # 替换为你的 Bucket 地域
+          source-dir: dist/  # 上传 dist 文件夹内的所有文件
