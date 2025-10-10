@@ -1,15 +1,12 @@
 {
   "name": "digital-garden",
   "version": "1.0.0",
-  "description": "Obsidian Digital Garden",
   "scripts": {
-    "build": "eleventy",
-    "serve": "eleventy --serve"
+    "build": "eleventy"  // Digital Garden 构建静态文件的核心命令
   },
   "dependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "@digital-garden/eleventy-plugin": "^1.0.0",
-    "markdown-it": "^13.0.1",
-    "markdown-it-anchor": "^8.6.7"
+    "@11ty/eleventy": "^2.0.1",  // 静态站点生成器（必需）
+    "markdown-it": "^13.0.1",    // 解析 Markdown（必需）
+    "markdown-it-anchor": "^8.6.7"  // 可选，生成标题锚点
   }
 }
